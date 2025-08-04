@@ -6,30 +6,37 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2C879ADF2E3CA551008C068B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C879AD52E3CA551008C068B /* AppDelegate.swift */; };
+		2C879AE02E3CA551008C068B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C879ADC2E3CA551008C068B /* SceneDelegate.swift */; };
+		2C879AE12E3CA551008C068B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C879ADD2E3CA551008C068B /* ViewController.swift */; };
+		2C879AE22E3CA551008C068B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C879AD62E3CA551008C068B /* Assets.xcassets */; };
+		2C879AE42E3CA551008C068B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C879AD92E3CA551008C068B /* LaunchScreen.storyboard */; };
+		2C879AE52E3CA551008C068B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C879ADB2E3CA551008C068B /* Main.storyboard */; };
+		2C879AE92E3CA56C008C068B /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C879AE72E3CA56C008C068B /* HomeVC.swift */; };
+		2C879AEA2E3CA56C008C068B /* HomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C879AE82E3CA56C008C068B /* HomeVC.xib */; };
+		2CF915082E40713F00459671 /* InputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF915062E40713F00459671 /* InputCell.swift */; };
+		2CF915092E40713F00459671 /* InputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF915072E40713F00459671 /* InputCell.xib */; };
+		2CF9150E2E40926E00459671 /* CameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF9150C2E40926E00459671 /* CameraVC.swift */; };
+		2CF9150F2E40926E00459671 /* CameraVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF9150D2E40926E00459671 /* CameraVC.xib */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		2C879ABD2E3CA535008C068B /* EF25PosterGenerator2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EF25PosterGenerator2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C879AD52E3CA551008C068B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2C879AD62E3CA551008C068B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2C879AD72E3CA551008C068B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C879AD82E3CA551008C068B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2C879ADA2E3CA551008C068B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2C879ADC2E3CA551008C068B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		2C879ADD2E3CA551008C068B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2C879AE72E3CA56C008C068B /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		2C879AE82E3CA56C008C068B /* HomeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeVC.xib; sourceTree = "<group>"; };
+		2CF915062E40713F00459671 /* InputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputCell.swift; sourceTree = "<group>"; };
+		2CF915072E40713F00459671 /* InputCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputCell.xib; sourceTree = "<group>"; };
+		2CF9150C2E40926E00459671 /* CameraVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraVC.swift; sourceTree = "<group>"; };
+		2CF9150D2E40926E00459671 /* CameraVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CameraVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		2C879ACF2E3CA537008C068B /* Exceptions for "EF25PosterGenerator2.0" folder in "EF25PosterGenerator2.0" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 2C879ABC2E3CA535008C068B /* EF25PosterGenerator2.0 */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		2C879ABF2E3CA535008C068B /* EF25PosterGenerator2.0 */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				2C879ACF2E3CA537008C068B /* Exceptions for "EF25PosterGenerator2.0" folder in "EF25PosterGenerator2.0" target */,
-			);
-			path = EF25PosterGenerator2.0;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		2C879ABA2E3CA535008C068B /* Frameworks */ = {
@@ -45,7 +52,7 @@
 		2C879AB42E3CA535008C068B = {
 			isa = PBXGroup;
 			children = (
-				2C879ABF2E3CA535008C068B /* EF25PosterGenerator2.0 */,
+				2C879ADE2E3CA551008C068B /* EF25PosterGenerator2.0 */,
 				2C879ABE2E3CA535008C068B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +63,50 @@
 				2C879ABD2E3CA535008C068B /* EF25PosterGenerator2.0.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		2C879ADE2E3CA551008C068B /* EF25PosterGenerator2.0 */ = {
+			isa = PBXGroup;
+			children = (
+				2CF9150B2E40922500459671 /* Camera */,
+				2C879AE62E3CA553008C068B /* Main */,
+				2C879AD52E3CA551008C068B /* AppDelegate.swift */,
+				2C879AD62E3CA551008C068B /* Assets.xcassets */,
+				2C879AD72E3CA551008C068B /* Info.plist */,
+				2C879AD92E3CA551008C068B /* LaunchScreen.storyboard */,
+				2C879ADB2E3CA551008C068B /* Main.storyboard */,
+				2C879ADC2E3CA551008C068B /* SceneDelegate.swift */,
+				2C879ADD2E3CA551008C068B /* ViewController.swift */,
+			);
+			path = EF25PosterGenerator2.0;
+			sourceTree = "<group>";
+		};
+		2C879AE62E3CA553008C068B /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				2CF9150A2E4091C600459671 /* CollectionViewCell */,
+				2C879AE72E3CA56C008C068B /* HomeVC.swift */,
+				2C879AE82E3CA56C008C068B /* HomeVC.xib */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		2CF9150A2E4091C600459671 /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2CF915062E40713F00459671 /* InputCell.swift */,
+				2CF915072E40713F00459671 /* InputCell.xib */,
+			);
+			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		2CF9150B2E40922500459671 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				2CF9150C2E40926E00459671 /* CameraVC.swift */,
+				2CF9150D2E40926E00459671 /* CameraVC.xib */,
+			);
+			path = Camera;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -72,9 +123,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				2C879ABF2E3CA535008C068B /* EF25PosterGenerator2.0 */,
 			);
 			name = EF25PosterGenerator2.0;
 			packageProductDependencies = (
@@ -122,6 +170,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C879AE22E3CA551008C068B /* Assets.xcassets in Resources */,
+				2C879AEA2E3CA56C008C068B /* HomeVC.xib in Resources */,
+				2CF915092E40713F00459671 /* InputCell.xib in Resources */,
+				2C879AE42E3CA551008C068B /* LaunchScreen.storyboard in Resources */,
+				2C879AE52E3CA551008C068B /* Main.storyboard in Resources */,
+				2CF9150F2E40926E00459671 /* CameraVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,10 +186,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C879ADF2E3CA551008C068B /* AppDelegate.swift in Sources */,
+				2C879AE92E3CA56C008C068B /* HomeVC.swift in Sources */,
+				2CF9150E2E40926E00459671 /* CameraVC.swift in Sources */,
+				2C879AE02E3CA551008C068B /* SceneDelegate.swift in Sources */,
+				2C879AE12E3CA551008C068B /* ViewController.swift in Sources */,
+				2CF915082E40713F00459671 /* InputCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2C879AD92E3CA551008C068B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C879AD82E3CA551008C068B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		2C879ADB2E3CA551008C068B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C879ADA2E3CA551008C068B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		2C879AD12E3CA537008C068B /* Debug */ = {
@@ -145,6 +224,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZLYSMNY22A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EF25PosterGenerator2.0/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -152,6 +232,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -159,6 +240,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.EF25PosterGenerator2-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -172,6 +257,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZLYSMNY22A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EF25PosterGenerator2.0/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -179,6 +265,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -186,6 +273,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.EF25PosterGenerator2-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
