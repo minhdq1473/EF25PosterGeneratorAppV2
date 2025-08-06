@@ -35,7 +35,7 @@ class InputCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         placeholderLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        placeholderLabel.textColor = .white
+        placeholderLabel.textColor = .neutral5
         placeholderLabel.textAlignment = .center
         placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
     }
