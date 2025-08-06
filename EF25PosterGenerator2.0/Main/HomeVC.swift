@@ -71,8 +71,7 @@ class HomeVC: UIViewController {
         initializeArrays()
         notificationLabel.text = "Add \(numberOfImg) photos to create poster"
         notificationLabel.textColor = .systemGray
-
-//        notificationLabel.text = "Select number of photos, default is 3"
+ //        notificationLabel.text = "Select number of photos, default is 3"
     }
     
     private func setupNumberPicker() {
@@ -387,57 +386,6 @@ class HomeVC: UIViewController {
     }
 }
 
-extension HomeVC: UIPickerViewDataSource, UIPickerViewDelegate {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return availableNumbers.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let number = availableNumbers[row]
-        return "\(number) photos"
-    }
-}
-
-extension HomeVC: PHPickerViewControllerDelegate {
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        picker.dismiss(animated: true)
-        
-        if let selectedIndex = selectedImg {
-            guard let result = results.first else { return }
-            result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
-                guard let self = self, let image = image as? UIImage else { return }
-                DispatchQueue.main.async {
-                    self.listImage[selectedIndex] = image
-                    self.selectedImg = nil
-                }
-            }
-        } else {
-            results.forEach { result in
-                result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
-                    guard let self = self, let image = image as? UIImage else { return }
-                    DispatchQueue.main.async {
-                        self.listImage.append(image)
-                    }
-                }
-            }
-        }
-    }
-}
-
-extension HomeVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true)
-        
-        if let image = info[.originalImage] as? UIImage {
-            listImage.append(image)
-        }
-    }
-}
-
 extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return numberOfImg
@@ -445,10 +393,16 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InputCell", for: indexPath) as! InputCell
+        
+        guard indexPath.item < inputImages.count && indexPath.item < inputTexts.count else {
+            cell.configure(with: nil, text: "", index: indexPath.item)
+            return cell
+        }
+        
         cell.configure(with: inputImages[indexPath.item], text: inputTexts[indexPath.item], index: indexPath.item + 1)
         cell.onTextChanged = { [weak self] text in
             self?.inputTexts[indexPath.item] = text
-        }
+            }
         cell.onImageTapped = { [weak self] in
             self?.changePhotoAtIndex(indexPath.item)
         }
@@ -486,12 +440,66 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
     }
 }
 
+extension HomeVC: UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return availableNumbers.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        let number = availableNumbers[row]
+        return "\(number) photos"
+    }
+}
+
+extension HomeVC: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+        
+        if let selectedIndex = selectedImg, selectedIndex < listImage.count {
+            guard let result = results.first else { return }
+            result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
+                guard let self = self, let image = image as? UIImage else { return }
+                DispatchQueue.main.async {
+//                    self.inputImages[selectedIndex] = image
+//                    self.inputCollectionView.reloadItems(at: [IndexPath(item: selectedIndex, section: 0)])
+                    self.listImage[selectedIndex] = image
+                    self.selectedImg = nil
+                }
+            }
+        } else {
+            results.forEach { result in
+                result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
+                    guard let self = self, let image = image as? UIImage else { return }
+                    DispatchQueue.main.async {
+                        self.listImage.append(image)
+                    }
+                }
+            }
+        }
+    }
+}
+
+extension HomeVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+        
+        if let image = info[.originalImage] as? UIImage {
+            listImage.append(image)
+        }
+    }
+}
 extension HomeVC: CameraVCDelegate {
     func cameraVC(_ controller: CameraVC, didCapture image: UIImage) {
-        if let selectedIndex = selectedImg {
-            inputImages[selectedIndex] = image
-            inputCollectionView.reloadItems(at: [IndexPath(item: selectedIndex, section: 0)])
-            selectedImg = nil
+        if let selectedIndex = selectedImg, selectedIndex < listImage.count {
+            self.listImage[selectedIndex] = image
+            
+//            inputImages[selectedIndex] = image
+//            inputCollectionView.reloadItems(at: [IndexPath(item: selectedIndex, section: 0)])
+//            selectedImg = nil
         } else {
             listImage.append(image)
         }
