@@ -46,6 +46,8 @@ class HomeVC: UIViewController {
     private var inputTexts: [String] = []
     private var resultImg: UIImage?
     private var numberOfImg = 3
+    private var selectedImg: Int?
+    
     private let numberPicker = UIPickerView()
     private let availableNumbers = Array(2...7)
     
@@ -122,6 +124,8 @@ class HomeVC: UIViewController {
     }
     
     private func updateInputImages() {
+        inputImages = Array(repeating: nil, count: numberOfImg)
+
         for (index, image) in listImage.enumerated() {
             if index < inputImages.count {
                 inputImages[index] = image
@@ -164,18 +168,13 @@ class HomeVC: UIViewController {
             resultPlaceholder.isHidden = false
         } else {
             if listImage.count < numberOfImg {
-                let alert = UIAlertController(title: "Add Photo", message: "Choose image source", preferredStyle: .actionSheet)
+                let alert = UIAlertController(title: "Change Photo", message: nil, preferredStyle: .actionSheet)
                 
                 alert.addAction(UIAlertAction(title: "Camera", style: .default) { _ in
                     let vc = CameraVC()
                     vc.delegate = self
                     vc.modalPresentationStyle = .fullScreen
                     self.present(vc, animated: true)
-
-//                    let picker = UIImagePickerController()
-//                    picker.sourceType = .camera
-//                    picker.delegate = self
-//                    self.present(picker, animated: true)
                 })
                 
                 alert.addAction(UIAlertAction(title: "Photo Library", style: .default) { _ in
@@ -407,23 +406,28 @@ extension HomeVC: UIPickerViewDataSource, UIPickerViewDelegate {
         let number = availableNumbers[row]
         return "\(number) photos"
     }
-    
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//         Optional: Update preview while scrolling
-//         let newNumber = availableNumbers[row]
-//         numberOfImagesTextField.text = "\(newNumber) photos"
-//    }
 }
 
 extension HomeVC: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true)
         
-        results.forEach { result in
+        if let selectedIndex = selectedImg {
+            guard let result = results.first else { return }
             result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
-                guard let self else { return }
+                guard let self = self, let image = image as? UIImage else { return }
                 DispatchQueue.main.async {
-                    self.listImage.append(image as! UIImage)
+                    self.listImage[selectedIndex] = image
+                    self.selectedImg = nil
+                }
+            }
+        } else {
+            results.forEach { result in
+                result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
+                    guard let self = self, let image = image as? UIImage else { return }
+                    DispatchQueue.main.async {
+                        self.listImage.append(image)
+                    }
                 }
             }
         }
@@ -451,22 +455,56 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollec
         cell.onTextChanged = { [weak self] text in
             self?.inputTexts[indexPath.item] = text
         }
+        cell.onImageTapped = { [weak self] in
+            self?.changePhotoAtIndex(indexPath.item)
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: 120, height: 164)
     }
+
+    private func changePhotoAtIndex(_ index: Int) {
+        selectedImg = index
+        
+        let alert = UIAlertController(title: "Change Photo", message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Camera", style: .default) { _ in
+            let vc = CameraVC()
+            vc.delegate = self
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        })
+        
+        alert.addAction(UIAlertAction(title: "Photo Library", style: .default) { _ in
+            var config = PHPickerConfiguration()
+            config.selectionLimit = 1
+            config.filter = .images
+            let picker = PHPickerViewController(configuration: config)
+            picker.delegate = self
+            self.present(picker, animated: true)
+        })
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alert, animated: true)
+        if selectedImg != nil && inputImages[index] != nil{
+            alert.addAction(UIAlertAction(title: "Remove Photo", style: .destructive) { _ in
+                self.listImage.remove(at: index)
+                self.selectedImg = nil
+            })
+        }
+    }
 }
 
 extension HomeVC: CameraVCDelegate {
     func cameraVC(_ controller: CameraVC, didCapture image: UIImage) {
-//        if selectedImageIndex >= 0 && selectedImageIndex < inputImages.count {
-//            replaceImageAt(index: selectedImageIndex, with: image)
-//            selectedImageIndex = -1
-//        } else {
+        if let selectedIndex = selectedImg {
+            inputImages[selectedIndex] = image
+            inputCollectionView.reloadItems(at: [IndexPath(item: selectedIndex, section: 0)])
+            selectedImg = nil
+        } else {
             listImage.append(image)
-//        }
+        }
     }
 }
 

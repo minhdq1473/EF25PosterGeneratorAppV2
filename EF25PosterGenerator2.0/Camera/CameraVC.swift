@@ -27,6 +27,8 @@ class CameraVC: UIViewController {
     private var isUsingFrontCamera = false
     private var flashMode: AVCaptureDevice.FlashMode = .auto
     
+    private let sessionQueue = DispatchQueue(label: "cameraQueue")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCamera()
@@ -34,25 +36,35 @@ class CameraVC: UIViewController {
     }
     
     private func setupCamera() {
-        cameraView.layer.cornerRadius = 12
-
-        setupDevice(position: .back)
-        
-//        guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
-//              let input = try? AVCaptureDeviceInput(device: device) else { return }
-//        captureSession.addInput(input)
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.videoGravity = .resizeAspectFill
         cameraView.layer.addSublayer(previewLayer)
-        captureSession.startRunning()
+        
+        sessionQueue.async {
+            self.setupDevice(position: .back)
+            self.captureSession.startRunning()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         previewLayer.frame = cameraView.bounds
         previewLayer.cornerRadius = cameraView.layer.cornerRadius
+//        sessionQueue.async { [weak self] in
+//            if self?.captureSession.isRunning == false {
+//                self?.captureSession.startRunning()
+//            }
+//        }
     }
-    override func viewDidLayoutSubviews() {
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         
+        sessionQueue.async { [weak self] in
+            if self?.captureSession.isRunning == true {
+                self?.captureSession.stopRunning()
+            }
+        }
     }
     
     private func setupDevice(position: AVCaptureDevice.Position) {
@@ -112,9 +124,12 @@ class CameraVC: UIViewController {
     }
     
     @IBAction func tapFlip(_ sender: UIButton) {
-        isUsingFrontCamera.toggle()
-        let position: AVCaptureDevice.Position = isUsingFrontCamera ? .front : .back
-        setupDevice(position: position)
+        sessionQueue.async { [weak self] in
+            guard let self = self else { return }
+            self.isUsingFrontCamera.toggle()
+            let position: AVCaptureDevice.Position = self.isUsingFrontCamera ? .front : .back
+            self.setupDevice(position: position)
+        }
     }
 }
 

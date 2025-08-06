@@ -12,25 +12,21 @@ class InputCell: UICollectionViewCell {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var placeholderLabel: UILabel!
     var onTextChanged: ((String) -> Void)?
+    var onImageTapped: (() -> Void)?
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setupUIImageView()
         setupTextField()
         // Initialization code
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+        imageView.addGestureRecognizer(tapGesture)
+        imageView.isUserInteractionEnabled = true
     }
-
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        super.init(coder: coder)
-//        setupUIImageView()
-//        setupTextField()
-//    }
-    
+    @objc private func imageTapped() {
+        onImageTapped?()
+    }
     private func setupUIImageView() {
         imageView.layer.cornerRadius = 12
         imageView.backgroundColor = .systemGray4
