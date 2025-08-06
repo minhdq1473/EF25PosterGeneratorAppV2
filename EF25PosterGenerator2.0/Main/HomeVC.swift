@@ -367,12 +367,6 @@ class HomeVC: UIViewController {
     }
     
     private func setupCollectionView() {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = 8
-        layout.minimumLineSpacing = 8
-        
-        inputCollectionView.collectionViewLayout = layout
         inputCollectionView.delegate = self
         inputCollectionView.dataSource = self
         inputCollectionView.showsHorizontalScrollIndicator = false
@@ -444,7 +438,7 @@ extension HomeVC: UIImagePickerControllerDelegate, UINavigationControllerDelegat
     }
 }
 
-extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return numberOfImg
     }
@@ -459,10 +453,6 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollec
             self?.changePhotoAtIndex(indexPath.item)
         }
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: 120, height: 164)
     }
 
     private func changePhotoAtIndex(_ index: Int) {
