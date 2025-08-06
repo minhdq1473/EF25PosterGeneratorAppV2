@@ -29,7 +29,7 @@ class InputCell: UICollectionViewCell {
     }
     private func setupUIImageView() {
         imageView.layer.cornerRadius = 12
-        imageView.backgroundColor = .systemGray4
+        imageView.backgroundColor = .neutral3
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -42,7 +42,7 @@ class InputCell: UICollectionViewCell {
     
     private func setupTextField() {
         textField.layer.cornerRadius = 12
-        textField.backgroundColor = .systemGray6
+        textField.backgroundColor = .neutral4
         textField.textAlignment = .center
         textField.font = UIFont.systemFont(ofSize: 14)
         textField.translatesAutoresizingMaskIntoConstraints = false

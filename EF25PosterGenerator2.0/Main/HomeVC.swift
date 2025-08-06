@@ -56,7 +56,7 @@ class HomeVC: UIViewController {
         paragraphStyle.alignment = .center
         return [
             .font: UIFont.systemFont(ofSize: 16, weight: .medium),
-            .foregroundColor: UIColor.white,
+            .foregroundColor: UIColor.neutral5,
             .paragraphStyle: paragraphStyle
         ]
     }()
@@ -80,8 +80,8 @@ class HomeVC: UIViewController {
         numberOfImagesTextField.textAlignment = .center
         numberOfImagesTextField.layer.cornerRadius = 8
         numberOfImagesTextField.layer.borderWidth = 1
-        numberOfImagesTextField.layer.borderColor = UIColor.systemCyan.cgColor
-        numberOfImagesTextField.backgroundColor = .systemBackground
+        numberOfImagesTextField.layer.borderColor = UIColor.primary1.cgColor
+        numberOfImagesTextField.backgroundColor = .neutral5
         numberOfImagesTextField.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         numberOfImagesTextField.isUserInteractionEnabled = true
         
@@ -149,7 +149,7 @@ class HomeVC: UIViewController {
         inputCollectionView.reloadData()
         
         notificationLabel.text = "Add \(newCount) photos to create poster"
-        notificationLabel.textColor = .systemGray
+        notificationLabel.textColor = .neutral2
         
         setupImages()
     }
@@ -168,7 +168,7 @@ class HomeVC: UIViewController {
             resultPlaceholder.isHidden = false
         } else {
             if listImage.count < numberOfImg {
-                let alert = UIAlertController(title: "Change Photo", message: nil, preferredStyle: .actionSheet)
+                let alert = UIAlertController(title: "Add Photo", message: nil, preferredStyle: .actionSheet)
                 
                 alert.addAction(UIAlertAction(title: "Camera", style: .default) { _ in
                     let vc = CameraVC()
@@ -190,7 +190,7 @@ class HomeVC: UIViewController {
                 present(alert, animated: true)
             } else {
                 notificationLabel.text = "Too many images selected!"
-                notificationLabel.textColor = .red
+                notificationLabel.textColor = .accentRed
             }
         }
     }
@@ -203,7 +203,7 @@ class HomeVC: UIViewController {
         } else {
             guard listImage.count == numberOfImg else {
                 notificationLabel.text = "Choose exactly \(numberOfImg) images!!"
-                notificationLabel.textColor = .red
+                notificationLabel.textColor = .accentRed
                 return
             }
             
@@ -307,7 +307,7 @@ class HomeVC: UIViewController {
             isGenerate = true
 //            resultImageView.subviews.forEach { $0.removeFromSuperview() }
             notificationLabel.text = "Generated successfully!"
-            notificationLabel.textColor = .systemGreen
+            notificationLabel.textColor = .accentGood
             resultPlaceholder.isHidden = true
         }
     }
@@ -333,10 +333,10 @@ class HomeVC: UIViewController {
     @objc private func imageSaved(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
             notificationLabel.text = "Error saving image: \(error.localizedDescription)"
-            notificationLabel.textColor = .systemRed
+            notificationLabel.textColor = .accentRed
         } else {
             notificationLabel.text = "Image saved successfully!"
-            notificationLabel.textColor = .systemGreen
+            notificationLabel.textColor = .accentGood
         }
     }
     
@@ -344,24 +344,24 @@ class HomeVC: UIViewController {
         addBtn.setTitle("Add Photos", for: .normal)
         addBtn.layer.cornerRadius = 16
         addBtn.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        addBtn.tintColor = .white
-        addBtn.backgroundColor = .systemCyan
+        addBtn.tintColor = .neutral5
+        addBtn.backgroundColor = .primary1
         
         generateBtn.setTitle("Generate Poster", for: .normal)
         generateBtn.layer.cornerRadius = 16
         generateBtn.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        generateBtn.tintColor = .white
-        generateBtn.backgroundColor = .systemCyan
+        generateBtn.tintColor = .neutral5
+        generateBtn.backgroundColor = .primary1
     }
     
     private func setupImages() {
         resultImageView.layer.cornerRadius = 16
-        resultImageView.backgroundColor = .systemGray4
+        resultImageView.backgroundColor = .neutral3
         resultImageView.subviews.forEach { $0.removeFromSuperview() }
         
         resultPlaceholder.text = "Your poster will show here"
         resultPlaceholder.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        resultPlaceholder.textColor = .white
+        resultPlaceholder.textColor = .neutral5
         resultPlaceholder.textAlignment = .center
         resultPlaceholder.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -389,7 +389,7 @@ class HomeVC: UIViewController {
     private func updateUI() {
         let imgCount = listImage.count
         notificationLabel.text = "Added \(imgCount)/\(numberOfImg) images"
-        notificationLabel.textColor = imgCount == numberOfImg ? .systemGreen : .systemGray
+        notificationLabel.textColor = imgCount == numberOfImg ? .accentGood : .neutral2
     }
 }
 
